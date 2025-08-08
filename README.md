@@ -46,7 +46,9 @@ Kafka’dan gelen verileri dinler.
 Verileri WebSocket kanallarına aktarır:
 
 /topic/prices
+
 /topic/alerts
+
 /topic/volatility
 
 ##  5. 🌐 Next.js / React UI (Veri Görselleştirme)
@@ -59,26 +61,39 @@ Gerçek zamanlı tablo, grafik ve ısı haritası sunar.
 ##  🧱 Kullanılan Teknolojiler ve Amaçları
 
 **Docker**	Tüm servisleri izole çalıştırmak ve dev ortamını tek tıkla ayağa kaldırmak
+
 **Python	Veri üretici (producer)** olarak görev alır, API'den veri çeker
+
 **Apache Kafka**	Servisler arası dayanıklı ve asenkron iletişim sağlar
+
 **ksqlDB**	Akan veri üzerinde SQL ile analiz yapar
+
 **Spring Boot	Backend** sunucusu, Kafka’dan gelen verileri WebSocket ile sunar
+
 **React**	Gerçek zamanlı, bileşen tabanlı kullanıcı arayüzü oluşturur
+
 
 #  ⚙️ Kurulum (Docker ile)
 bash
+
 ## Proje klasörüne gir
+
 cd crypto_dashboard
 
 ## Docker konteynerlerini başlat
 
 docker-compose up --build
+
 Her servis kendi konteynerinde ayağa kalkar:
 
 Python Producer → localhost:8000
+
 Kafka Broker → localhost:9092
+
 ksqlDB UI → http://localhost:8088
+
 Spring Boot → localhost:8080
+
 React UI → localhost:3000
 
 ### 📈 Gerçek Zamanlı Özellikler
