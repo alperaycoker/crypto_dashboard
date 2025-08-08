@@ -150,6 +150,7 @@ crypto_dashboard/
 
 📄 Lisans
 MIT License © Alp Eray Çoker
+
 Idea Creator © Haydarozlukk 
 
 ### ✍️ Medium Makalesi (Yakında)
