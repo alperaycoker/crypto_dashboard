@@ -106,30 +106,18 @@ React UI → localhost:3000
 
 #### 🌐 WebSocket Altyapısı – Tek bağlantı üzerinden çoklu kanal dinleme
 
-## 🛣️ Yol Haritası
-
- Fiyat verisi toplama (producer)
-
- Kafka ile servisler arası iletişim
-
- ksqlDB ile anomali tespiti
-
- WebSocket altyapısı
-
- React UI ile görselleştirme
-
- Kullanıcı favori coin listesi
-
- Fiyat alarm sistemi (e-mail / push)
-
- PWA desteği
-
 ### 📁 Proje Yapısı
+
 crypto_dashboard/
+
 ├── producer-python/
+
 ├── backend-springboot/
+
 ├── dashboard-ui/ (Next.js)
+
 ├── docker-compose.yml
+
 └── README.md
 
 ### 📄 Lisans
