@@ -120,7 +120,4 @@ crypto_dashboard/
 
 └── README.md
 
-### 📄 Lisans
-MIT License © Alper Aycoker
-
 ### ✍️ Medium Makalesi (Yakında)
