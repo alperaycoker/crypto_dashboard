@@ -17,19 +17,23 @@ Bu proje, **Olay Bazlı Mikroservis Mimarisi** kullanarak yüksek performanslı 
 <img width="2998" height="182" alt="kripto_gozcu_mimari" src="https://github.com/user-attachments/assets/fdc5ac28-55b5-421d-882d-2bdf87d89af8" />
 
 
-🔄 Verinin Yolculuğu
-## 1. Python Producer (Veri Üretimi)
+## 🔄 Verinin Yolculuğu
+
+### 1. Python Producer (Veri Üretimi)
 
 CryptoCompare API'den belirli aralıklarla fiyat verisi alır.
+
 JSON formatında ({ symbol, price, timestamp }) Kafka’ya gönderir.
+
 Kafka topic: crypto_forex_raw
 
-## 2. Apache Kafka (Veri Taşıma)
+### 2. Apache Kafka (Veri Taşıma)
 
 Tüm veri akışının merkezidir.
+
 Verileri farklı topic’lere dağıtarak servisler arası bağımsızlığı sağlar.
 
-## 3. ksqlDB (Veri Analizi)
+### 3. ksqlDB (Veri Analizi)
 SQL benzeri sorgularla anlık hesaplamalar yapar:
 
 Ortalama fiyat hesaplama
@@ -40,7 +44,7 @@ Kafka’ya analiz sonuçlarını yazar:
 PRICE_SPIKE_ALERTS
 volatility_5min
 
-##  4. Spring Boot Backend (Veri Servis Etme)
+###  4. Spring Boot Backend (Veri Servis Etme)
 Kafka’dan gelen verileri dinler.
 
 Verileri WebSocket kanallarına aktarır:
@@ -51,7 +55,7 @@ Verileri WebSocket kanallarına aktarır:
 
 /topic/volatility
 
-##  5. React UI (Veri Görselleştirme)
+###  5. React UI (Veri Görselleştirme)
 Kullanıcının tarayıcısında çalışır.
 
 WebSocket ile bağlanarak canlı veri alır.
