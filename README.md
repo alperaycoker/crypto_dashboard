@@ -70,7 +70,7 @@ ksqlDB	Akan veri üzerinde SQL ile analiz yapar
 Spring Boot	Backend sunucusu, Kafka’dan gelen verileri WebSocket ile sunar
 Next.js / React	Gerçek zamanlı, bileşen tabanlı kullanıcı arayüzü oluşturur
 
-##  ⚙️ Kurulum (Docker ile)
+#  ⚙️ Kurulum (Docker ile)
 
 bash
 Kopyala
@@ -78,7 +78,7 @@ Düzenle
 # Proje klasörüne gir
 cd crypto_dashboard
 
-# Docker konteynerlerini başlat
+## Docker konteynerlerini başlat
 
 docker-compose up --build
 Her servis kendi konteynerinde ayağa kalkar:
@@ -93,7 +93,7 @@ Spring Boot → localhost:8080
 
 React UI (Vercel deploy ya da lokal) → localhost:3000
 
-📈 Gerçek Zamanlı Özellikler
+### 📈 Gerçek Zamanlı Özellikler
 
 📊 Fiyat Tablosu – Canlı kripto para fiyatları
 
@@ -103,7 +103,7 @@ React UI (Vercel deploy ya da lokal) → localhost:3000
 
 🌐 WebSocket Altyapısı – Tek bağlantı üzerinden çoklu kanal dinleme
 
-🛣️ Yol Haritası
+## 🛣️ Yol Haritası
 
  Fiyat verisi toplama (producer)
 
@@ -121,7 +121,7 @@ React UI (Vercel deploy ya da lokal) → localhost:3000
 
  PWA desteği
 
-📁 Proje Yapısı
+### 📁 Proje Yapısı
 crypto_dashboard/
 ├── producer-python/
 ├── backend-springboot/
@@ -129,7 +129,7 @@ crypto_dashboard/
 ├── docker-compose.yml
 └── README.md
 
-📄 Lisans
+### 📄 Lisans
 MIT License © Alper Aycoker
 
-✍️ Medium Makalesi (Yakında)
+### ✍️ Medium Makalesi (Yakında)
