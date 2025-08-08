@@ -19,6 +19,22 @@ Bu proje, **Olay Bazlı Mikroservis Mimarisi** kullanarak yüksek performanslı 
 
 ## 🔄 Verinin Yolculuğu
 
+### 0. Docker (Sistem Orkestrasyonu)
+Görevi: Tüm servisleri izole bir şekilde ayağa kaldırmak ve aynı ortamda çalıştırmak.
+
+Nasıl Çalışır?
+Projede tanımlı **docker-compose.yml** dosyası ile aşağıdaki tüm servisler tek komutla başlatılır:
+
+**Python Producer**
+
+**Apache Kafka (broker, zookeeper)**
+
+**ksqlDB**
+
+**Spring Boot Backend**
+
+**React (Next.js) frontend (isteğe bağlı)**
+
 ### 1. Python Producer (Veri Üretimi)
 
 CryptoCompare API'den belirli aralıklarla fiyat verisi alır.
