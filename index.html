@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canlı Kripto Fiyat Grafiği</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f7f9;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        #chart-container {
+            width: 80%;
+            max-width: 900px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        #last-updated {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Canlı Kripto ve Forex Fiyatları</h1>
+    
+    <div id="chart-container">
+        <canvas id="cryptoChart"></canvas>
+    </div>
+
+    <p id="last-updated">Yükleniyor...</p>
+
+    <script>
+        const ctx = document.getElementById('cryptoChart').getContext('2d');
+        const lastUpdatedElement = document.getElementById('last-updated');
+        let cryptoChart;
+
+        // Rastgele ve çekici renkler üreten bir yardımcı fonksiyon
+        function generateColors(count) {
+            const colors = [];
+            for (let i = 0; i < count; i++) {
+                const r = Math.floor(Math.random() * 200);
+                const g = Math.floor(Math.random() * 200);
+                const b = Math.floor(Math.random() * 200);
+                colors.push(`rgba(${r}, ${g}, ${b}, 0.6)`);
+            }
+            return colors;
+        }
+
+        // Grafiği ilk defa oluşturan fonksiyon
+        function createChart(labels, dataPoints) {
+            cryptoChart = new Chart(ctx, {
+                type: 'bar', // Grafik tipi: 'bar', 'line', 'pie' vb. olabilir
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Anlık Fiyat',
+                        data: dataPoints,
+                        backgroundColor: generateColors(labels.length),
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false // Çok fazla veri olduğunda efsaneyi gizlemek daha iyi olabilir
+                        },
+                        title: {
+                            display: true,
+                            text: 'Anlık Varlık Fiyatları'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false, // Fiyatlar 0'dan başlamayacağı için
+                             ticks: {
+                                callback: function(value, index, values) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Mevcut grafiği yeni verilerle güncelleyen fonksiyon
+        function updateChart(labels, dataPoints) {
+            cryptoChart.data.labels = labels;
+            cryptoChart.data.datasets[0].data = dataPoints;
+            cryptoChart.data.datasets[0].backgroundColor = generateColors(labels.length);
+            cryptoChart.update(); // Grafiği animasyonla güncelle
+        }
+
+        // Backend'den veriyi çeken ana fonksiyon
+        async function fetchDataAndUpdateChart() {
+            try {
+                // Spring Boot API endpoint'i
+                const response = await fetch('http://localhost:8080/api/crypto-forex');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const ksqlData = await response.json();
+
+                // ksqlDB'den gelen veriyi Chart.js'in anlayacağı formata çeviriyoruz
+                // ksqlDB verisi: [{"ROW":{"columns":["BTC/USD", 65000.0, 1678...]}}, ...]
+                const labels = ksqlData.map(item => item.ROW.columns[0]);       // Sembol (örn: "BITCOIN/USD")
+                const dataPoints = ksqlData.map(item => item.ROW.columns[1]);  // Fiyat (örn: 65000.0)
+
+                if (!cryptoChart) {
+                    // Grafik daha önce oluşturulmadıysa, oluştur
+                    createChart(labels, dataPoints);
+                } else {
+                    // Grafik varsa, güncelle
+                    updateChart(labels, dataPoints);
+                }
+
+                lastUpdatedElement.textContent = `Son Güncelleme: ${new Date().toLocaleTimeString()}`;
+
+            } catch (error) {
+                console.error("Veri alınırken veya grafik güncellenirken hata oluştu:", error);
+                lastUpdatedElement.textContent = "Veri sunucusuna bağlanılamadı. Backend'in çalıştığından emin olun.";
+            }
+        }
+
+        // Sayfa yüklendiğinde ilk veriyi hemen çek
+        fetchDataAndUpdateChart();
+
+        // Her 5 saniyede bir verileri yeniden çek ve grafiği güncelle
+        setInterval(fetchDataAndUpdateChart, 5000);
+
+    </script>
+
+</body>
+</html>
