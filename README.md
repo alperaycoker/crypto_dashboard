@@ -1,83 +1,137 @@
-Crypto Dashboard
+# 💹 Event-Driven Crypto Monitoring Dashboard
 
-Gerçek zamanlı kripto para verilerini işleyen, analiz eden ve anomali/volatilite uyarıları sunan Docker tabanlı mikroservis mimarisi.
+Crypto Dashboard, gerçek zamanlı kripto para fiyatlarını izleyen, anomali tespiti yapan ve yüksek oynaklık durumlarını analiz ederek kullanıcıya WebSocket üzerinden canlı veri sunan, olay bazlı mikroservis mimarisiyle inşa edilmiş kapsamlı bir dashboard projesidir.
 
-📈 Genel Mimari
+---
 
-Bileşenler:
+## 🧠 Genel Mimarî: Event-Driven Microservices
 
-CryptoCompare API: Harici veri sağlayıcı.
+Bu proje, **Olay Bazlı Mikroservis Mimarisi** kullanarak yüksek performanslı ve esnek bir sistem tasarımı sunar. Sistemdeki servisler, doğrudan birbiriyle konuşmak yerine, merkezi bir mesajlaşma sistemi (Apache Kafka) üzerinden haberleşir. Bu yapı sayesinde her servis bağımsız geliştirilebilir ve sistemin bir parçasında yapılan değişiklik diğer parçaları etkilemez.
 
-Python Producer: API'den verileri alır ve Kafka'ya yollar.
+Örneğin, veri sağlayıcısı olan `CryptoCompare API` değiştirilmek istenirse, yalnızca Python producer servisinde güncelleme yapılır; ksqlDB ya da Spring Boot backend bu durumdan etkilenmez.
 
-Apache Kafka: Veri iletim kuyruklarını yönetir.
+---
 
-ksqlDB: Gerçek zamanlı stream sorguları yapar.
+## 📊 Mimarî Diyagram
 
-Spring Boot Backend: İlgili Kafka konularını dinler ve frontend'e websocket ile veri yollar.
+<img width="2998" height="182" alt="kripto_gozcu_mimari" src="https://github.com/user-attachments/assets/fdc5ac28-55b5-421d-882d-2bdf87d89af8" />
 
-React / Next.js Frontend: Gerçek zamanlı arayüz.
 
-Ngrok Tunnel: Frontend'e internet üzerinden erişimi sağlar.
+🔄 Verinin Yolculuğu
+1. 🐍 Python Producer (Veri Üretimi)
+CryptoCompare API'den belirli aralıklarla fiyat verisi alır.
 
-🚀 Kurulum
+JSON formatında ({ symbol, price, timestamp }) Kafka’ya gönderir.
 
-Gereksinimler
+Kafka topic: crypto_forex_raw
 
-Docker & Docker Compose
+2. Apache Kafka (Veri Taşıma)
+Tüm veri akışının merkezidir.
 
-Ngrok hesabı (frontend yayını için)
+Verileri farklı topic’lere dağıtarak servisler arası bağımsızlığı sağlar.
 
-Adımlar:
+3. 🧠 ksqlDB (Veri Analizi)
+SQL benzeri sorgularla anlık hesaplamalar yapar:
 
-API servisi sağlayacısından api key'i edinmek ve "docker-compose.yml" dosyasında ilgili yere yapıştırmak.
+Ortalama fiyat hesaplama
 
-git clone https://github.com/kullaniciadi/crypto_dashboard //
-cd crypto_dashboard //
+5 dakikalık volatilite analizi
+
+Anomali (ani fiyat sıçraması) tespiti
+
+Kafka’ya analiz sonuçlarını yazar:
+
+PRICE_SPIKE_ALERTS
+
+volatility_5min
+
+4. ☕ Spring Boot Backend (Veri Servis Etme)
+Kafka’dan gelen verileri dinler.
+
+Verileri WebSocket kanallarına aktarır:
+
+/topic/prices
+
+/topic/alerts
+
+/topic/volatility
+
+5. 🌐 Next.js / React UI (Veri Görselleştirme)
+Kullanıcının tarayıcısında çalışır.
+
+WebSocket ile bağlanarak canlı veri alır.
+
+Gerçek zamanlı tablo, grafik ve ısı haritası sunar.
+
+🧱 Kullanılan Teknolojiler ve Amaçları
+
+Teknoloji	Rolü
+Docker	Tüm servisleri izole çalıştırmak ve dev ortamını tek tıkla ayağa kaldırmak
+Python	Veri üretici (producer) olarak görev alır, API'den veri çeker
+Apache Kafka	Servisler arası dayanıklı ve asenkron iletişim sağlar
+ksqlDB	Akan veri üzerinde SQL ile analiz yapar
+Spring Boot	Backend sunucusu, Kafka’dan gelen verileri WebSocket ile sunar
+Next.js / React	Gerçek zamanlı, bileşen tabanlı kullanıcı arayüzü oluşturur
+
+⚙️ Kurulum (Docker ile)
+bash
+Kopyala
+Düzenle
+# Proje klasörüne gir
+cd crypto_dashboard
+
+# Docker konteynerlerini başlat
+
 docker-compose up --build
+Her servis kendi konteynerinde ayağa kalkar:
 
-Ngrok ile frontend'i yayına almak:
+Python Producer → localhost:8000
 
-ngrok http 3000
+Kafka Broker → localhost:9092
 
-🌐 Kullanılan Teknolojiler
+ksqlDB UI → http://localhost:8088
 
-Python (Producer)
+Spring Boot → localhost:8080
 
-Apache Kafka
+React UI (Vercel deploy ya da lokal) → localhost:3000
 
-ksqlDB
+📈 Gerçek Zamanlı Özellikler
 
-Spring Boot
+📊 Fiyat Tablosu – Canlı kripto para fiyatları
 
-React / Next.js
+📉 Oynaklık Analizi – Kısa vadeli volatilite takibi
 
-Docker & Docker Compose
+⚠️ Anomali Uyarıları – Ani fiyat sıçramalarının tespiti
 
-Ngrok
+🌐 WebSocket Altyapısı – Tek bağlantı üzerinden çoklu kanal dinleme
 
-⚙️ Kafka Topic Yapısı
+🛣️ Yol Haritası
 
-crypto_forex_raw: Ham veriler
+ Fiyat verisi toplama (producer)
 
-PRICE_SPIKE_ALERTS: Anomali tespiti
+ Kafka ile servisler arası iletişim
 
-volatility_5min: 5 dakikalık volatilite verisi
+ ksqlDB ile anomali tespiti
 
-✅ Özellikler
+ WebSocket altyapısı
 
-Gerçek zamanlı fiyat verisi
+ React UI ile görselleştirme
 
-Stream tabanlı analiz
+ Kullanıcı favori coin listesi
 
-Anomali tespiti
+ Fiyat alarm sistemi (e-mail / push)
 
-Websocket ile frontend entegrasyonu
+ PWA desteği
 
-Taşınabilir mikroservis mimarisi
+📁 Proje Yapısı
+crypto_dashboard/
+├── producer-python/
+├── backend-springboot/
+├── dashboard-ui/ (Next.js)
+├── docker-compose.yml
+└── README.md
 
+📄 Lisans
+MIT License © Alper Aycoker
 
-<img width="1918" height="730" alt="image" src="https://github.com/user-attachments/assets/91bfd52c-4881-4cc8-9e46-8365d075c8a9" />
-<img width="1900" height="745" alt="image" src="https://github.com/user-attachments/assets/18cdc230-522a-4e69-ab85-8b37a87303a3" />
-
-
+✍️ Medium Makalesi (Yakında)
