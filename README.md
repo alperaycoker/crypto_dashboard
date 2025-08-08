@@ -77,7 +77,7 @@ Websocket ile frontend entegrasyonu
 Taşınabilir mikroservis mimarisi
 
 
-<img width="1911" height="868" alt="image" src="https://github.com/user-attachments/assets/cdd51782-3dc8-4321-a675-13e69a1d9dad" />
+<img width="1918" height="730" alt="image" src="https://github.com/user-attachments/assets/91bfd52c-4881-4cc8-9e46-8365d075c8a9" />
+<img width="1900" height="745" alt="image" src="https://github.com/user-attachments/assets/18cdc230-522a-4e69-ab85-8b37a87303a3" />
 
-<img width="1897" height="738" alt="image" src="https://github.com/user-attachments/assets/68633740-a2b3-461f-97fe-f36b9ba5a6da" />
 
