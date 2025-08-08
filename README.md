@@ -18,7 +18,7 @@ Bu proje, **Olay Bazlı Mikroservis Mimarisi** kullanarak yüksek performanslı 
 
 
 🔄 Verinin Yolculuğu
-## 1. 🐍 Python Producer (Veri Üretimi)
+## 1. Python Producer (Veri Üretimi)
 
 CryptoCompare API'den belirli aralıklarla fiyat verisi alır.
 JSON formatında ({ symbol, price, timestamp }) Kafka’ya gönderir.
@@ -29,7 +29,7 @@ Kafka topic: crypto_forex_raw
 Tüm veri akışının merkezidir.
 Verileri farklı topic’lere dağıtarak servisler arası bağımsızlığı sağlar.
 
-## 3. 🧠 ksqlDB (Veri Analizi)
+## 3. ksqlDB (Veri Analizi)
 SQL benzeri sorgularla anlık hesaplamalar yapar:
 
 Ortalama fiyat hesaplama
@@ -40,7 +40,7 @@ Kafka’ya analiz sonuçlarını yazar:
 PRICE_SPIKE_ALERTS
 volatility_5min
 
-##  4. ☕ Spring Boot Backend (Veri Servis Etme)
+##  4. Spring Boot Backend (Veri Servis Etme)
 Kafka’dan gelen verileri dinler.
 
 Verileri WebSocket kanallarına aktarır:
@@ -51,7 +51,7 @@ Verileri WebSocket kanallarına aktarır:
 
 /topic/volatility
 
-##  5. 🌐 Next.js / React UI (Veri Görselleştirme)
+##  5. React UI (Veri Görselleştirme)
 Kullanıcının tarayıcısında çalışır.
 
 WebSocket ile bağlanarak canlı veri alır.
@@ -60,17 +60,17 @@ Gerçek zamanlı tablo, grafik ve ısı haritası sunar.
 
 ##  🧱 Kullanılan Teknolojiler ve Amaçları
 
-**Docker**	Tüm servisleri izole çalıştırmak ve dev ortamını tek tıkla ayağa kaldırmak
+**Docker**:	Tüm servisleri izole çalıştırmak ve dev ortamını tek tıkla ayağa kaldırmak
 
-**Python	Veri üretici (producer)** olarak görev alır, API'den veri çeker
+**Python**:	Veri üretici (producer)** olarak görev alır, API'den veri çeker
 
-**Apache Kafka**	Servisler arası dayanıklı ve asenkron iletişim sağlar
+**Apache Kafka**:	Servisler arası dayanıklı ve asenkron iletişim sağlar
 
-**ksqlDB**	Akan veri üzerinde SQL ile analiz yapar
+**ksqlDB**:	Akan veri üzerinde SQL ile analiz yapar
 
-**Spring Boot	Backend** sunucusu, Kafka’dan gelen verileri WebSocket ile sunar
+**Spring Boot	Backend**: sunucusu, Kafka’dan gelen verileri WebSocket ile sunar
 
-**React**	Gerçek zamanlı, bileşen tabanlı kullanıcı arayüzü oluşturur
+**React**:	Gerçek zamanlı, bileşen tabanlı kullanıcı arayüzü oluşturur
 
 
 ##  ⚙️ Kurulum (Docker ile)
@@ -89,7 +89,7 @@ Python Producer → localhost:8000
 
 Kafka Broker → localhost:9092
 
-ksqlDB UI → http://localhost:8088
+ksqlDB UI → localhost:8088
 
 Spring Boot → localhost:8080
 
@@ -118,5 +118,8 @@ crypto_dashboard/
 ├── docker-compose.yml
 
 └── README.md
+
+📄 Lisans
+MIT License © Alp Eray Çoker
 
 ### ✍️ Medium Makalesi (Yakında)
