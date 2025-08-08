@@ -32,8 +32,8 @@ Adımlar:
 
 API servisi sağlayacısından api key'i edinmek ve "docker-compose.yml" dosyasında ilgili yere yapıştırmak.
 
-git clone https://github.com/kullaniciadi/crypto_dashboard
-cd crypto_dashboard
+git clone https://github.com/kullaniciadi/crypto_dashboard //
+cd crypto_dashboard //
 docker-compose up --build
 
 Ngrok ile frontend'i yayına almak:
