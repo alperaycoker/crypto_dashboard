@@ -18,19 +18,19 @@ Bu proje, **Olay Bazlı Mikroservis Mimarisi** kullanarak yüksek performanslı 
 
 
 🔄 Verinin Yolculuğu
-1. 🐍 Python Producer (Veri Üretimi)
+## 1. 🐍 Python Producer (Veri Üretimi)
 CryptoCompare API'den belirli aralıklarla fiyat verisi alır.
 
 JSON formatında ({ symbol, price, timestamp }) Kafka’ya gönderir.
 
 Kafka topic: crypto_forex_raw
 
-2. Apache Kafka (Veri Taşıma)
+## 2. Apache Kafka (Veri Taşıma)
 Tüm veri akışının merkezidir.
 
 Verileri farklı topic’lere dağıtarak servisler arası bağımsızlığı sağlar.
 
-3. 🧠 ksqlDB (Veri Analizi)
+## 3. 🧠 ksqlDB (Veri Analizi)
 SQL benzeri sorgularla anlık hesaplamalar yapar:
 
 Ortalama fiyat hesaplama
@@ -42,28 +42,25 @@ Anomali (ani fiyat sıçraması) tespiti
 Kafka’ya analiz sonuçlarını yazar:
 
 PRICE_SPIKE_ALERTS
-
 volatility_5min
 
-4. ☕ Spring Boot Backend (Veri Servis Etme)
+##  4. ☕ Spring Boot Backend (Veri Servis Etme)
 Kafka’dan gelen verileri dinler.
 
 Verileri WebSocket kanallarına aktarır:
 
 /topic/prices
-
 /topic/alerts
-
 /topic/volatility
 
-5. 🌐 Next.js / React UI (Veri Görselleştirme)
+##  5. 🌐 Next.js / React UI (Veri Görselleştirme)
 Kullanıcının tarayıcısında çalışır.
 
 WebSocket ile bağlanarak canlı veri alır.
 
 Gerçek zamanlı tablo, grafik ve ısı haritası sunar.
 
-🧱 Kullanılan Teknolojiler ve Amaçları
+##  🧱 Kullanılan Teknolojiler ve Amaçları
 
 Teknoloji	Rolü
 Docker	Tüm servisleri izole çalıştırmak ve dev ortamını tek tıkla ayağa kaldırmak
@@ -73,7 +70,8 @@ ksqlDB	Akan veri üzerinde SQL ile analiz yapar
 Spring Boot	Backend sunucusu, Kafka’dan gelen verileri WebSocket ile sunar
 Next.js / React	Gerçek zamanlı, bileşen tabanlı kullanıcı arayüzü oluşturur
 
-⚙️ Kurulum (Docker ile)
+##  ⚙️ Kurulum (Docker ile)
+
 bash
 Kopyala
 Düzenle
