@@ -139,8 +139,10 @@ crypto_dashboard/
 
 └── README.md
 
-<img width="1894" height="822" alt="image" src="https://github.com/user-attachments/assets/4585c244-bbdd-4333-9352-e3ec290d81ff" />
-<img width="1893" height="649" alt="image" src="https://github.com/user-attachments/assets/22c8b74c-55a8-48de-9154-faefadd51d15" />
+<img width="1897" height="728" alt="image" src="https://github.com/user-attachments/assets/d6303735-fb3f-4711-84de-8a2e810b0a18" />
+<img width="1892" height="754" alt="image" src="https://github.com/user-attachments/assets/c38c4672-3f48-45ae-abbd-7b2ac3f8cd61" />
+
+
 
 
 
