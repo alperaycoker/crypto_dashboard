@@ -73,14 +73,13 @@ Gerçek zamanlı tablo, grafik ve ısı haritası sunar.
 **React**	Gerçek zamanlı, bileşen tabanlı kullanıcı arayüzü oluşturur
 
 
-#  ⚙️ Kurulum (Docker ile)
-bash
+##  ⚙️ Kurulum (Docker ile)
 
-## Proje klasörüne gir
+### Proje klasörüne gir
 
 cd crypto_dashboard
 
-## Docker konteynerlerini başlat
+### Docker konteynerlerini başlat
 
 docker-compose up --build
 
@@ -96,7 +95,7 @@ Spring Boot → localhost:8080
 
 React UI → localhost:3000
 
-### 📈 Gerçek Zamanlı Özellikler
+## 📈 Gerçek Zamanlı Özellikler
 
 #### 📊 Fiyat Tablosu – Canlı kripto para fiyatları
 
