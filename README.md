@@ -19,26 +19,22 @@ Bu proje, **Olay Bazlı Mikroservis Mimarisi** kullanarak yüksek performanslı 
 
 🔄 Verinin Yolculuğu
 ## 1. 🐍 Python Producer (Veri Üretimi)
+
 CryptoCompare API'den belirli aralıklarla fiyat verisi alır.
-
 JSON formatında ({ symbol, price, timestamp }) Kafka’ya gönderir.
-
 Kafka topic: crypto_forex_raw
 
 ## 2. Apache Kafka (Veri Taşıma)
-Tüm veri akışının merkezidir.
 
+Tüm veri akışının merkezidir.
 Verileri farklı topic’lere dağıtarak servisler arası bağımsızlığı sağlar.
 
 ## 3. 🧠 ksqlDB (Veri Analizi)
 SQL benzeri sorgularla anlık hesaplamalar yapar:
 
 Ortalama fiyat hesaplama
-
 5 dakikalık volatilite analizi
-
 Anomali (ani fiyat sıçraması) tespiti
-
 Kafka’ya analiz sonuçlarını yazar:
 
 PRICE_SPIKE_ALERTS
@@ -62,20 +58,16 @@ Gerçek zamanlı tablo, grafik ve ısı haritası sunar.
 
 ##  🧱 Kullanılan Teknolojiler ve Amaçları
 
-Teknoloji	Rolü
-Docker	Tüm servisleri izole çalıştırmak ve dev ortamını tek tıkla ayağa kaldırmak
-Python	Veri üretici (producer) olarak görev alır, API'den veri çeker
-Apache Kafka	Servisler arası dayanıklı ve asenkron iletişim sağlar
-ksqlDB	Akan veri üzerinde SQL ile analiz yapar
-Spring Boot	Backend sunucusu, Kafka’dan gelen verileri WebSocket ile sunar
-Next.js / React	Gerçek zamanlı, bileşen tabanlı kullanıcı arayüzü oluşturur
+**Docker**	Tüm servisleri izole çalıştırmak ve dev ortamını tek tıkla ayağa kaldırmak
+**Python	Veri üretici (producer)** olarak görev alır, API'den veri çeker
+**Apache Kafka**	Servisler arası dayanıklı ve asenkron iletişim sağlar
+**ksqlDB**	Akan veri üzerinde SQL ile analiz yapar
+**Spring Boot	Backend** sunucusu, Kafka’dan gelen verileri WebSocket ile sunar
+**React**	Gerçek zamanlı, bileşen tabanlı kullanıcı arayüzü oluşturur
 
 #  ⚙️ Kurulum (Docker ile)
-
 bash
-Kopyala
-Düzenle
-# Proje klasörüne gir
+## Proje klasörüne gir
 cd crypto_dashboard
 
 ## Docker konteynerlerini başlat
@@ -84,24 +76,20 @@ docker-compose up --build
 Her servis kendi konteynerinde ayağa kalkar:
 
 Python Producer → localhost:8000
-
 Kafka Broker → localhost:9092
-
 ksqlDB UI → http://localhost:8088
-
 Spring Boot → localhost:8080
-
-React UI (Vercel deploy ya da lokal) → localhost:3000
+React UI → localhost:3000
 
 ### 📈 Gerçek Zamanlı Özellikler
 
-📊 Fiyat Tablosu – Canlı kripto para fiyatları
+#### 📊 Fiyat Tablosu – Canlı kripto para fiyatları
 
-📉 Oynaklık Analizi – Kısa vadeli volatilite takibi
+#### 📉 Oynaklık Analizi – Kısa vadeli volatilite takibi
 
-⚠️ Anomali Uyarıları – Ani fiyat sıçramalarının tespiti
+#### ⚠️ Anomali Uyarıları – Ani fiyat sıçramalarının tespiti
 
-🌐 WebSocket Altyapısı – Tek bağlantı üzerinden çoklu kanal dinleme
+#### 🌐 WebSocket Altyapısı – Tek bağlantı üzerinden çoklu kanal dinleme
 
 ## 🛣️ Yol Haritası
 
