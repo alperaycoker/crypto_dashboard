@@ -148,8 +148,7 @@ crypto_dashboard/
 
 
 
-📄 Lisans
-MIT License © Alp Eray Çoker
+Created by © Alp Eray Çoker
 
 Idea Creator © Haydarozlukk 
 
