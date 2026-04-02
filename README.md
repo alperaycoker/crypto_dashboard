@@ -2,6 +2,12 @@
 
 **Crypto Dashboard**, gerçek zamanlı kripto para fiyatlarını izleyen, anomali tespiti yapan ve yüksek volatilite durumlarını analiz ederek kullanıcıya WebSocket üzerinden canlı veri sunan kapsamlı bir izleme sistemidir. Modern **Olay Güdümlü Mikroservis Mimarisi (Event-Driven Microservices)** kullanılarak geliştirilmiştir.
 
+
+
+<img width="1897" height="728" alt="image" src="https://github.com/user-attachments/assets/d6303735-fb3f-4711-84de-8a2e810b0a18" />
+
+<img width="1892" height="754" alt="image" src="https://github.com/user-attachments/assets/c38c4672-3f48-45ae-abbd-7b2ac3f8cd61" />
+
 ---
 
 ## 🧠 Genel Mimari: Olay Güdümlü Mikroservisler
@@ -55,9 +61,6 @@ Sistem, **Docker** tarafından izole konteynerler halinde orkestre edilir ve aş
 
 Projeyi yerel ortamınızda çalıştırmak için sisteminizde **Docker** ve **Docker Compose** kurulu olmalıdır.
 
-<img width="1897" height="728" alt="image" src="https://github.com/user-attachments/assets/d6303735-fb3f-4711-84de-8a2e810b0a18" />
-
-<img width="1892" height="754" alt="image" src="https://github.com/user-attachments/assets/c38c4672-3f48-45ae-abbd-7b2ac3f8cd61" />
 
 **1. Projeyi Klonlayın:**
 ```bash
